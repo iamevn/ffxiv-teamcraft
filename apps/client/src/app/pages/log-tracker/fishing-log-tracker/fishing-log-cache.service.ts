@@ -3,8 +3,8 @@ import { map, shareReplay, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { AuthFacade } from '../../../+state/auth.facade';
 import { GarlandToolsService } from '../../../core/api/garland-tools.service';
-import { fshSpearLogOrder } from '../fsh-spear-log-order';
-import { fshLogOrder } from '../fsh-log-order';
+import { fshSpearLogAreaOrder, fshSpearLogSpotOrder } from '../fsh-spear-log-order';
+import { fshLogAreaOrder, fshLogSpotOrder } from '../fsh-log-order';
 import { LazyDataFacade } from '../../../lazy-data/+state/lazy-data.facade';
 
 @Injectable({
@@ -56,7 +56,7 @@ export class FishingLogCacheService {
           });
           area.spots = area.spots
             .sort((a, b) => {
-              const logOrder = (displayIndex === 1) ? fshSpearLogOrder : fshLogOrder;
+              const logOrder = (displayIndex === 1) ? fshSpearLogSpotOrder : fshLogSpotOrder;
               const a_name = places[a.placeId].en;
               const b_name = places[b.placeId].en;
               if (logOrder.includes(a_name) && logOrder.includes(b_name)) {
@@ -70,7 +70,7 @@ export class FishingLogCacheService {
         });
         display.tabs = display.tabs
           .sort((a, b) => {
-            const logOrder = (displayIndex === 1) ? fshSpearLogOrder : fshLogOrder;
+            const logOrder = (displayIndex === 1) ? fshSpearLogAreaOrder : fshLogAreaOrder;
             const a_name = places[a.placeId].en;
             const b_name = places[b.placeId].en;
             if (logOrder.includes(a_name) && logOrder.includes(b_name)) {
